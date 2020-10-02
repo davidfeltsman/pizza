@@ -1,0 +1,39 @@
+$black: #232323;
+$background: #ffdf8c;
+$gray-line: #f6f6f6;
+$orange: #fe5f1e;
+$orange-hover: #ef4500;
+
+$duration: 0.15s;
+$fontSize: 16px;
+
+@mixin _1170 {
+  @media (max-width: 1170px) {
+      @content;
+  }
+}
+@mixin _979 {
+  @media (max-width: 979px) {
+      @content;
+  }
+}
+@mixin _768 {
+  @media (max-width: 768px)  {
+      @content;
+  }
+}
+@mixin _600 {
+  @media (max-width: 600px) {
+      @content;
+  }
+}
+@mixin _480 {
+  @media (max-width: 480px) {
+      @content;
+  }
+}
+@mixin _380 {
+  @media (max-width: 380px) {
+      @content;
+  }
+}

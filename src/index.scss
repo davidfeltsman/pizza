@@ -1,0 +1,22 @@
+@import "./assets/fonts.scss";
+@import "variables.scss";
+
+@import "normalize.scss";
+
+body {
+  background-color: $background;
+}
+
+.App {
+  max-width: 1340px;
+  background-color: #fff;
+  margin: 50px auto;
+  padding: 50px;
+  @include _768 {
+    padding: 20px;
+  }
+  @include _600 {
+    margin: 20px auto;
+    padding: 15px;
+  }
+}

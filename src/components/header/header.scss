@@ -1,0 +1,107 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  min-height: 140px;
+  border-bottom: 1px solid $gray-line;
+  align-items: center;
+  @include _768 {
+    min-height: 90px;
+  }
+  &__logo {
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+  }
+  &__img {
+    width: 38px;
+    height: 38px;
+    margin-right: 17px;
+    @include _480 {
+      margin-right: 10px;
+    }
+  }
+  &__title {
+    display: flex;
+    flex-direction: column;
+  }
+  &__mainTitle {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  &__subTitle {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  &__busketLink {
+    background-color: $orange;
+    border-radius: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    padding: 15px;
+    transition: background-color $duration ease-in-out;
+    &:hover {
+      background-color: $orange-hover;
+    }
+    @include _480 {
+      padding: 10px;
+      font-size: 14px;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      opacity: 0.9;
+    }
+    @include _380 {
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
+  &__totalPrice {
+    color: #fff;
+    border-right: 1px solid rgba(255, 255, 255, .25);
+    padding-right: 13px;
+    @include _480 {
+      padding-right: 7px;
+    }
+  }
+  &__totalPurchases {
+    color: #fff;
+    padding-left: 40px;
+    position: relative;
+    @include _480 {
+      padding-left: 30px;
+    }
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 13px;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url(../../assets/img/cart.svg);
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-position: center;
+      background-size: 100%;
+      @include _480 {
+        width: 14px;
+        height: 14px;
+        left: 10px;
+        background-size: 99%;
+      }
+    }
+  }
+}
+
+

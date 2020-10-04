@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
   }
-  &__mainTitle {
+  &__main-title {
     font-style: normal;
     font-weight: 800;
     font-size: 24px;
@@ -35,13 +35,13 @@
     letter-spacing: 0.01em;
     text-transform: uppercase;
   }
-  &__subTitle {
+  &__sub-title {
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
   }
-  &__busketLink {
+  &__busket-link {
     background-color: $orange;
     border-radius: 30px;
     font-style: normal;
@@ -53,7 +53,7 @@
     &:hover {
       background-color: $orange-hover;
     }
-    @include _480 {
+    @include _600 {
       padding: 10px;
       font-size: 14px;
       position: fixed;
@@ -66,7 +66,7 @@
       font-weight: normal;
     }
   }
-  &__totalPrice {
+  &__total-price {
     color: #fff;
     border-right: 1px solid rgba(255, 255, 255, .25);
     padding-right: 13px;
@@ -74,7 +74,7 @@
       padding-right: 7px;
     }
   }
-  &__totalPurchases {
+  &__total-purchases {
     color: #fff;
     padding-left: 40px;
     position: relative;

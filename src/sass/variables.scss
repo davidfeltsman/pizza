@@ -3,9 +3,21 @@ $background: #ffdf8c;
 $gray-line: #f6f6f6;
 $orange: #fe5f1e;
 $orange-hover: #ef4500;
+$light-gray: #F9F9F9;
+$dark: #282828;
+$darker-gray: #f4f4f4;
+$light-orange: rgba(254,95,30,0.05);
+
+$menu-background: #F3F3F3;
 
 $duration: 0.15s;
 $fontSize: 16px;
+
+@mixin _1340 {
+  @media (max-width: 1340px) {
+    @content;
+  }
+}
 
 @mixin _1170 {
   @media (max-width: 1170px) {
@@ -19,6 +31,11 @@ $fontSize: 16px;
 }
 @mixin _768 {
   @media (max-width: 768px)  {
+      @content;
+  }
+}
+@mixin _670 {
+  @media (max-width: 670px) {
       @content;
   }
 }

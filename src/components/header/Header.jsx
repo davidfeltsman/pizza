@@ -9,13 +9,13 @@ export default function Header() {
       <div className="header__logo">
         <img className="header__img" src={PizzaLogo} alt="Pizza Logo" />
         <div className="header__title">
-          <h1 className="header__mainTitle">Hello Pizza</h1>
-          <span className="header__subTitle">вкуснейшая пицца города</span>
+          <h1 className="header__main-title">Hello Pizza</h1>
+          <span className="header__sub-title">вкуснейшая пицца города</span>
         </div>
       </div>
-      <Link className="header__busketLink" to="/busket">
-        <span className="header__totalPrice">500 ₽</span>
-        <span className="header__totalPurchases">3</span>
+      <Link className="header__busket-link" to="/busket">
+        <span className="header__total-price">500 ₽</span>
+        <span className="header__total-purchases">3</span>
       </Link>
     </header>
   )

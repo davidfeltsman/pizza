@@ -13,7 +13,7 @@ export default function Header() {
           <span className="header__sub-title">вкуснейшая пицца города</span>
         </div>
       </div>
-      <Link className="header__busket-link" to="/busket">
+      <Link className="header__busket-link" to="/basket">
         <span className="header__total-price">500 ₽</span>
         <span className="header__total-purchases">3</span>
       </Link>

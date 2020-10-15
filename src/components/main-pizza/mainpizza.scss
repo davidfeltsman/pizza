@@ -30,6 +30,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  &__rating {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    align-items: center;
+    @include _600 {
+      right: inherit;
+      left: 0;
+    }
+    &-value {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    &-img {
+      width: 20px;
+      margin-bottom: 2px;
+    }
+  }
   &__image {
     width: 90%;
     margin-bottom: 10px;
@@ -59,12 +79,14 @@
     margin-bottom: 7px;
     li {
       flex-basis: 50%;
+      flex-grow: 1;
     }
   }
   &__size {
     display: flex;
     li {
       flex-basis: calc(100% / 3);
+      flex-grow: 1;
     }
   }
   &__option {

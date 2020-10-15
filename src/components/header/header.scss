@@ -50,6 +50,7 @@
     line-height: 19px;
     padding: 15px;
     transition: background-color $duration ease-in-out;
+    z-index: 99;
     &:hover {
       background-color: $orange-hover;
     }

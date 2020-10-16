@@ -2,11 +2,34 @@ import React, { useState } from 'react'
 import PlusIcon from '../../assets/img/plus.svg'
 import PropTypes from 'prop-types'
 import SmallPizzaIcon from '../../assets/img/star.svg'
+import { useDispatch } from 'react-redux'
+import { addPizzaToBusket } from '../../redux/actions/actionCreators';
 
-export default function PizzaCard({ params: { imageUrl, name, price, sizes, types, rating } }) {
+const doughTypes = ["тонкое", "традиционное"]
+
+export default function PizzaCard({ params: { id, imageUrl, name, price, sizes, types, rating } }) {
 
   const [activeType, setActiveType] = useState(types[0])
   const [activeSize, setActiveSize] = useState(sizes[0])
+  const [actualPrice, setActualPrice] = useState(price[0])
+  const dispatch = useDispatch();
+
+  function addPizzaButtonHandler() {
+    const pizzaSchema = {
+      id,
+      imageUrl,
+      name,
+      price: actualPrice,
+      size: activeSize,
+      doughType: doughTypes[activeType],
+      count: 1,
+    }
+    dispatch(addPizzaToBusket(pizzaSchema))
+  }
+  function sizeChangeHandler(size, index) {
+    setActiveSize(size);
+    setActualPrice(price[index])
+  }
 
   return (
     <div className="pizza-card">
@@ -18,24 +41,24 @@ export default function PizzaCard({ params: { imageUrl, name, price, sizes, type
       <h3 className="pizza-card__title">{name}</h3>
       <div className="pizza-card__options">
         <ul className="pizza-card__thickness">
-          {types.map(type => (
-            <li key={"type-" + type}>
+          {types.map((type, index) => (
+            <li key={"type" + index}>
               <button
                 type="button"
                 className={activeType === type ? "pizza-card__option pizza-card__option_active" : "pizza-card__option"}
                 onClick={() => setActiveType(type)}
               >
-                {type ? "традиционное" : "тонкое"}
+                {doughTypes[type]}
               </button>
             </li>))}
         </ul>
         <ul className="pizza-card__size">
-          {sizes.map(size => (
-            <li key={"size" + size}>
+          {sizes.map((size, index) => (
+            <li key={"size" + index}>
               <button
                 type="button"
                 className={activeSize === size ? "pizza-card__option pizza-card__option_active" : "pizza-card__option"}
-                onClick={() => setActiveSize(size)}
+                onClick={() => sizeChangeHandler(size, index)}
               >{size} см.
               </button>
             </li>
@@ -43,26 +66,29 @@ export default function PizzaCard({ params: { imageUrl, name, price, sizes, type
         </ul>
       </div>
       <div className="pizza-card__footer">
-        <span className="pizza-card__price">от {price} ₽</span>
-        <button className="pizza-card__add-button"><img className="pizza-card__add-button-icon" src={PlusIcon} alt="+" /> Добавить <span className=" pizza-card__counter">2</span></button>
+        <span className="pizza-card__price">{actualPrice} ₽</span>
+        <button onClick={addPizzaButtonHandler} className="pizza-card__add-button">
+          <img className="pizza-card__add-button-icon" src={PlusIcon} alt="+" /> Добавить <span className=" pizza-card__counter">2</span>
+        </button>
       </div>
     </div>
   )
 }
 
 PizzaCard.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  sizes: PropTypes.array.isRequired,
-  types: PropTypes.array.isRequired,
-  rating: PropTypes.number.isRequired
+  id: PropTypes.number,
+  imageUrl: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.array,
+  sizes: PropTypes.array,
+  types: PropTypes.array,
+  rating: PropTypes.number
 }
 
 PizzaCard.defaultProps = {
   imageUrl: "https://img.icons8.com/ios/452/pizza.png",
   name: "Пицца",
-  price: 0,
+  price: [],
   sizes: [],
   types: [],
   rating: 0

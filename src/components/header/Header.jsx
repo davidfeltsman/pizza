@@ -3,7 +3,7 @@ import PizzaLogo from '../../assets/img/pizza-logo.svg'
 import { Link } from 'react-router-dom'
 import './header.scss'
 
-export default function Header() {
+export default function Header({ pathname }) {
   return (
     <header className="header">
       <Link className="header__logo" to="/">
@@ -13,10 +13,10 @@ export default function Header() {
           <span className="header__sub-title">вкуснейшая пицца города</span>
         </div>
       </Link>
-      <Link className="header__busket-link" to="/basket">
+      {pathname === '/' && <Link className="header__busket-link" to="/basket">
         <span className="header__total-price">500 ₽</span>
         <span className="header__total-purchases">3</span>
-      </Link>
+      </Link>}
     </header>
   )
 }

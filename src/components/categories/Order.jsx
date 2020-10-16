@@ -69,8 +69,8 @@ export default function Order({ sortBy, orderDirection, onOrderClick, onSortByCl
 Order.propTypes = {
   sortBy: PropTypes.string.isRequired,
   orderDirection: PropTypes.string.isRequired,
-  onOrderClick: PropTypes.func,
-  onSortByClick: PropTypes.func
+  onOrderClick: PropTypes.func.isRequired,
+  onSortByClick: PropTypes.func.isRequired
 }
 
 Order.defauldProps = {

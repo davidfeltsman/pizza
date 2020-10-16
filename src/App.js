@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import NotFound from './pages/404/NotFound'
@@ -19,9 +19,11 @@ function App() {
     dispatch(fetchPizzas());
   }, [dispatch]);
 
+  let { pathname } = useLocation()
+
   return (
     <div className="App">
-      <Header />
+      <Header pathname={pathname} />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/basket' component={Basket} />

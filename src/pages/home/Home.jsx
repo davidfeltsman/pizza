@@ -36,7 +36,3 @@ export default function Home() {
     </main>
   )
 }
-
-
-// Проптайпсы
-// Приступить к корзине

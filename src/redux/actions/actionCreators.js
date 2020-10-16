@@ -1,4 +1,4 @@
-import { SET_SORT_BY, SET_CATEGORY, SET_PIZZAS, SET_LOADING, SET_ORDER_DIRECTION } from '../constants'
+import { SET_SORT_BY, SET_CATEGORY, SET_PIZZAS, SET_LOADING, SET_ORDER_DIRECTION, ADD_PIZZA_TO_BUSKET } from '../constants'
 import API from '../../utils/API'
 
 //filters
@@ -32,4 +32,10 @@ export const setLoading = (isLoading) => ({
 export const setPizzas = (items) => ({
   type: SET_PIZZAS,
   items
+})
+
+//basket
+export const addPizzaToBusket = (obj) => ({
+  type: ADD_PIZZA_TO_BUSKET,
+  payload: obj
 })

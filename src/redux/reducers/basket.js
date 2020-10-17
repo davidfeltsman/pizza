@@ -44,12 +44,16 @@ const basket = (state = initialState, { type, payload }) => {
           ...state,
           items: state.items.map((item, index) => index === findEqual
             ? { ...item, count: item.count + 1 }
-            : item)
+            : item),
+          totalCounter: state.totalCounter + 1,
+          totalPrice: state.totalPrice + payload.price
         }
       } else {
         return {
           ...state,
-          items: [...state.items, payload]
+          items: [...state.items, payload],
+          totalCounter: state.totalCounter + 1,
+          totalPrice: state.totalPrice + payload.price
         }
       }
     default:

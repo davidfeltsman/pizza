@@ -5,10 +5,15 @@ import { useDispatch } from 'react-redux'
 import { setCategory, setOrderDirection, setSortBy } from '../../redux/actions/actionCreators';
 import PropTypes from 'prop-types'
 
-const avaibleCategories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые', 'Грибы']
 
-export default function Categories({ activeCategory, sortBy, orderDirection }) {
 
+export default function Categories({ activeCategory, sortBy, orderDirection, items }) {
+
+  const avaibleCategories = items.length
+    ? Array.from(new Set(items
+      .map(item => item.category)
+      .reduce((acc, current) => acc.concat(current))))
+    : items
   const dispatch = useDispatch();
 
   function categoryClickHandler(value) {
@@ -36,7 +41,7 @@ export default function Categories({ activeCategory, sortBy, orderDirection }) {
           {avaibleCategories.map((text, index) => {
             return (
               <li key={text + index} className="categories__item">
-                <button onClick={() => categoryClickHandler(index)} className={index === activeCategory ? "categories__link categories__link_active" : "categories__link"}>{text}</button>
+                <button onClick={() => categoryClickHandler(text)} className={text === activeCategory ? "categories__link categories__link_active" : "categories__link"}>{text}</button>
               </li>
             )
           })}
@@ -48,7 +53,7 @@ export default function Categories({ activeCategory, sortBy, orderDirection }) {
           onSortByClick={sortClickHandler}
         />
       </nav>
-      <h2 className="categories__current-category">{activeCategory === null ? 'Все' : avaibleCategories[activeCategory]} пиццы</h2>
+      <h2 className="categories__current-category">{activeCategory === null ? 'все' : avaibleCategories[activeCategory]} пиццы</h2>
     </>
   )
 }
@@ -56,14 +61,16 @@ export default function Categories({ activeCategory, sortBy, orderDirection }) {
 Categories.propTypes = {
   activeCategory: PropTypes.oneOfType([
     PropTypes.oneOf([null]),
-    PropTypes.number
+    PropTypes.string
   ]),
   sortBy: PropTypes.string.isRequired,
-  orderDirection: PropTypes.string.isRequired
+  orderDirection: PropTypes.string.isRequired,
+  items: PropTypes.array
 }
 
 Categories.defauldProps = {
   activeCategory: null,
   sortBy: 'rating',
-  orderDirection: 'desc'
+  orderDirection: 'desc',
+  items: []
 }

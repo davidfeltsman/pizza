@@ -37,6 +37,7 @@
     line-height: 19px;
     letter-spacing: 0.015em;
     transition: background-color $duration ease-in-out;
+    text-transform: capitalize;
     &:last-child {
       margin-right: 0;
     }
@@ -172,5 +173,8 @@
  &__current-category {
     font-size: 32px;
     margin-top: 32px;
+    &::first-letter {
+      text-transform: uppercase;
+    }
  }
 }

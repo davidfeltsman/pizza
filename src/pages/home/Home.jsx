@@ -2,7 +2,8 @@ import React from 'react'
 import Categories from '../../components/categories/Categories'
 import MainPizza from '../../components/main-pizza/MainPizza'
 import Loader from '../../components/loader/Loader'
-import _ from 'lodash'
+import { orderBy } from 'lodash'
+
 import { useSelector } from 'react-redux'
 
 export default function Home() {
@@ -16,17 +17,15 @@ export default function Home() {
     selected: basket.items
   }));
 
-  const filteredItems = category === null
-    ? _.orderBy(items, sortBy, orderDirection)
-    : _
-      .chain(items)
-      .filter({ category })
-      .orderBy(sortBy, orderDirection)
-      .value()
+  const categoried = (category !== null)
+    ? items.filter(item => item.category.includes(category))
+    : items
+  const filteredItems = orderBy(categoried, sortBy, orderDirection)
 
   return (
     <main className="main-content">
       <Categories
+        items={items}
         activeCategory={category}
         orderDirection={orderDirection}
         sortBy={sortBy}

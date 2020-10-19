@@ -53,7 +53,7 @@ export default function Categories({ activeCategory, sortBy, orderDirection, ite
           onSortByClick={sortClickHandler}
         />
       </nav>
-      <h2 className="categories__current-category">{activeCategory === null ? 'все' : avaibleCategories[activeCategory]} пиццы</h2>
+      <h2 className="categories__current-category">{activeCategory === null ? 'все' : activeCategory} пиццы</h2>
     </>
   )
 }

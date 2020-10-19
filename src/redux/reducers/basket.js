@@ -7,68 +7,49 @@ const initialState = {
 }
 
 const basket = (state = initialState, { type, payload }) => {
+  let newItems = []
   switch (type) {
     case ADD_PIZZA_TO_BASKET:
-      if (!state.items.length) {
-        return {
-          ...state,
-          items: [payload],
-          totalCounter: state.totalCounter + 1,
-          totalPrice: state.totalPrice + payload.price,
-        }
-      } else {
-        let equal = state.items.findIndex(item => item.id === payload.id
+      let equal = state.items.length
+        ? state.items.findIndex(item => item.id === payload.id
           && item.doughType === payload.doughType
           && item.size === payload.size)
-        if (equal !== -1) return {
-          ...state,
-          items: state.items.map((item, index) => index === equal
-            ? { ...item, count: item.count + 1 }
-            : item),
-          totalCounter: state.totalCounter + 1,
-          totalPrice: state.totalPrice + payload.price,
-        }
-        return {
-          ...state,
-          items: [...state.items, payload],
-          totalCounter: state.totalCounter + 1,
-          totalPrice: state.totalPrice + payload.price,
-        }
+        : -1
+      if (equal !== -1) {
+        newItems = state.items.map((item, index) => index === equal
+          ? { ...item, count: item.count + 1 }
+          : item)
+      } else {
+        newItems = [...state.items, payload]
       }
+      break
     case REMOVE_PIZZA_FROM_BASKET:
       if (state.items[payload] && state.items[payload].count === 1) {
-        return {
-          ...state,
-          items: state.items.filter((item, index) => index !== payload),
-          totalCounter: state.totalCounter - 1,
-          totalPrice: state.totalPrice - state.items[payload].price
-        }
+        newItems = state.items.filter((item, index) => index !== payload)
       } else {
-        return {
-          ...state,
-          items: state.items.map((item, index) => index === payload ? { ...item, count: state.items[index].count - 1 } : item),
-          totalCounter: state.totalCounter - 1,
-          totalPrice: state.totalPrice - state.items[payload].price
-        }
+        newItems = state.items.map((item, index) => index === payload ? { ...item, count: state.items[index].count - 1 } : item)
       }
+      break
     case REMOVE_PIZZA_GROUP:
-      return {
-        ...state,
-        items: state.items.filter((item, index) => index !== payload),
-        totalCounter: state.totalCounter - state.items[payload].count,
-        totalPrice: state.totalPrice - state.items[payload].price * state.items[payload].count,
-      }
+      newItems = state.items.filter((item, index) => index !== payload)
+      break
     case CLEAR_BASKET:
-      return {
-        ...state,
-        items: [],
-        totalCounter: 0,
-        totalPrice: 0,
-      }
+      newItems = []
+      break
     default:
       return {
         ...state
       }
+  }
+
+  const currentTotalCount = newItems.length ? newItems.map(item => item.count).reduce((a, b) => a + b) : 0
+  const currentTotalPrice = newItems.length ? newItems.map(item => item.count * item.price).reduce((a, b) => a + b) : 0
+
+  return {
+    ...state,
+    items: newItems,
+    totalCounter: currentTotalCount,
+    totalPrice: currentTotalPrice
   }
 }
 

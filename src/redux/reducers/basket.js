@@ -1,12 +1,20 @@
 import { ADD_PIZZA_TO_BASKET, REMOVE_PIZZA_FROM_BASKET, REMOVE_PIZZA_GROUP, CLEAR_BASKET } from '../constants'
+import { load } from 'redux-localstorage-simple'
 
-const initialState = {
-  items: [],
-  totalCounter: 0,
-  totalPrice: 0,
+let basketStorage = load({
+  states: ['basket'],
+  namespace: 'pizza-basket'
+})
+
+if (!basketStorage.basket || !basketStorage.basket.items || !basketStorage.basket.items.length) {
+  basketStorage.basket = {
+    items: [],
+    totalCounter: 0,
+    totalPrice: 0
+  }
 }
 
-const basket = (state = initialState, { type, payload }) => {
+const basket = (state = basketStorage.basket, { type, payload }) => {
   let newItems = []
   switch (type) {
     case ADD_PIZZA_TO_BASKET:

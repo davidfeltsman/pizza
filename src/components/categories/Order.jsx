@@ -26,7 +26,8 @@ export default function Order({ sortBy, orderDirection, onOrderClick, onSortByCl
     setIsPopUpOpen(value)
   }
   function outsideClickHandler(e) {
-    if (!e.path.includes(orderRef.current)) {
+    let path = e.path || (e.composedPath && e.composedPath())
+    if (!path.includes(orderRef.current)) {
       setIsPopUpOpen(false)
     }
   }

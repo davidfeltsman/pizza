@@ -7,12 +7,13 @@ import { useSelector } from 'react-redux'
 
 export default function Home() {
 
-  const { items, isLoading, category, sortBy, orderDirection } = useSelector(({ pizzas: { items, isLoading }, filters: { category, sortBy, orderDirection } }) => ({
+  const { items, isLoading, category, sortBy, orderDirection, selected } = useSelector(({ pizzas: { items, isLoading }, filters: { category, sortBy, orderDirection }, basket }) => ({
     items,
     isLoading,
     category,
     sortBy,
-    orderDirection
+    orderDirection,
+    selected: basket.items
   }));
 
   const filteredItems = category === null
@@ -32,7 +33,7 @@ export default function Home() {
       />
       {isLoading
         ? <Loader />
-        : <MainPizza items={filteredItems} />}
+        : <MainPizza items={filteredItems} selected={selected} />}
     </main>
   )
 }

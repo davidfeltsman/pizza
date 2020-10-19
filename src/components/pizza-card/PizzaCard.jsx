@@ -2,17 +2,18 @@ import React, { useState } from 'react'
 import PlusIcon from '../../assets/img/plus.svg'
 import PropTypes from 'prop-types'
 import SmallPizzaIcon from '../../assets/img/star.svg'
-import { useDispatch } from 'react-redux'
-import { addPizzaToBusket } from '../../redux/actions/actionCreators';
+import { addPizzaToBasket } from '../../redux/actions/actionCreators';
+import { useDispatch } from 'react-redux';
+
 
 const doughTypes = ["тонкое", "традиционное"]
 
-export default function PizzaCard({ params: { id, imageUrl, name, price, sizes, types, rating } }) {
+export default function PizzaCard({ params: { id, imageUrl, name, price, sizes, types, rating }, selected }) {
 
   const [activeType, setActiveType] = useState(types[0])
   const [activeSize, setActiveSize] = useState(sizes[0])
   const [actualPrice, setActualPrice] = useState(price[0])
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   function addPizzaButtonHandler() {
     const pizzaSchema = {
@@ -24,13 +25,14 @@ export default function PizzaCard({ params: { id, imageUrl, name, price, sizes, 
       doughType: doughTypes[activeType],
       count: 1,
     }
-    dispatch(addPizzaToBusket(pizzaSchema))
+    dispatch(addPizzaToBasket(pizzaSchema))
   }
   function sizeChangeHandler(size, index) {
     setActiveSize(size);
     setActualPrice(price[index])
   }
-
+  const equalInBasket = selected.find(item => item.id === id && item.doughType === doughTypes[activeType] && item.size === activeSize)
+  const counter = equalInBasket ? equalInBasket.count : null
   return (
     <div className="pizza-card">
       <div className="pizza-card__rating">
@@ -68,7 +70,7 @@ export default function PizzaCard({ params: { id, imageUrl, name, price, sizes, 
       <div className="pizza-card__footer">
         <span className="pizza-card__price">{actualPrice} ₽</span>
         <button onClick={addPizzaButtonHandler} className="pizza-card__add-button">
-          <img className="pizza-card__add-button-icon" src={PlusIcon} alt="+" /> Добавить <span className=" pizza-card__counter">2</span>
+          <img className="pizza-card__add-button-icon" src={PlusIcon} alt="+" /> Добавить {counter && <span className=" pizza-card__counter">{counter}</span>}
         </button>
       </div>
     </div>
@@ -82,7 +84,8 @@ PizzaCard.propTypes = {
   price: PropTypes.array,
   sizes: PropTypes.array,
   types: PropTypes.array,
-  rating: PropTypes.number
+  rating: PropTypes.number,
+  selected: PropTypes.array
 }
 
 PizzaCard.defaultProps = {
@@ -91,5 +94,6 @@ PizzaCard.defaultProps = {
   price: [],
   sizes: [],
   types: [],
-  rating: 0
+  rating: 0,
+  selected: []
 }

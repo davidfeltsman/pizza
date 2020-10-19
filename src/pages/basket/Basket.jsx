@@ -7,16 +7,17 @@ import { useSelector } from 'react-redux'
 
 export default function Basket() {
 
-  const { items, totalPrice, totalCounter } = useSelector(({ basket: { items, totalPrice, totalCounter } }) => ({
-    items,
-    totalPrice,
-    totalCounter
+  const { basket } = useSelector(({ basket }) => ({
+    basket
   }))
 
   return (
     <main className="basket">
-      <BasketWithContent />
-      <BasketEmpty />
+      {basket.items.length
+        ? <BasketWithContent basket={basket} />
+        : <BasketEmpty />
+      }
+
     </main>
   )
 }

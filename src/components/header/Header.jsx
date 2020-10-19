@@ -1,9 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import PizzaLogo from '../../assets/img/pizza-logo.svg'
 import { Link } from 'react-router-dom'
 import './header.scss'
+import { useSelector } from 'react-redux'
 
 export default function Header({ pathname }) {
+
+  const { totalCounter, totalPrice } = useSelector(({ basket: { totalPrice, totalCounter } }) => ({
+    totalPrice,
+    totalCounter,
+  }))
+
   return (
     <header className="header">
       <Link className="header__logo" to="/">
@@ -14,9 +22,13 @@ export default function Header({ pathname }) {
         </div>
       </Link>
       {pathname === '/' && <Link className="header__busket-link" to="/basket">
-        <span className="header__total-price">500 ₽</span>
-        <span className="header__total-purchases">3</span>
+        <span className="header__total-price">{totalPrice} ₽</span>
+        <span className="header__total-purchases">{totalCounter}</span>
       </Link>}
     </header>
   )
+}
+
+Header.propTypes = {
+  pathname: PropTypes.string.isRequired,
 }

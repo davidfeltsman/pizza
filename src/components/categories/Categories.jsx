@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux'
 import { setCategory, setOrderDirection, setSortBy } from '../../redux/actions/actionCreators';
 import PropTypes from 'prop-types'
 
-
-
 export default function Categories({ activeCategory, sortBy, orderDirection, items }) {
 
   const avaibleCategories = items.length
@@ -31,6 +29,7 @@ export default function Categories({ activeCategory, sortBy, orderDirection, ite
   function sortClickHandler(value) {
     dispatch(setSortBy(value))
   }
+
   return (
     <>
       <nav className="categories">

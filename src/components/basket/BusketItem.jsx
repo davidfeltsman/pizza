@@ -18,6 +18,7 @@ export default function BusketItem({ item, index }) {
   function removePizzaGroupHandler() {
     dispatch(removePizzaGroup(index))
   }
+
   return (
     <div className="basket__pizza-block">
       <img src={imageUrl} alt="Pizza" className="basket__pizza-img" />

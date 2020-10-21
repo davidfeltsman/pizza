@@ -1,10 +1,15 @@
 @import 'variables.scss';
 
 .pizza-wrapper {
-  margin-top: 35px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin-bottom: 50px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 65px 35px;
+  background-color: #fff;
+  padding-left: 50px;
+  padding-right: 50px;
   @include _1340 {
     grid-template-columns: repeat(3, 1fr);
     gap: 60px 50px;
@@ -21,8 +26,8 @@
     padding-bottom: 30px;
   }
   @include _380 {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 

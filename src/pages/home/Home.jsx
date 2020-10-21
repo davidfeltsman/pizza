@@ -24,15 +24,19 @@ export default function Home() {
 
   return (
     <main className="main-content">
-      <Categories
-        items={items}
-        activeCategory={category}
-        orderDirection={orderDirection}
-        sortBy={sortBy}
-      />
       {isLoading
         ? <Loader />
-        : <MainPizza items={filteredItems} selected={selected} />}
+        : <>
+          <Categories
+            items={items}
+            activeCategory={category}
+            orderDirection={orderDirection}
+            sortBy={sortBy}
+          />
+          <MainPizza items={filteredItems} selected={selected} />
+        </>
+      }
+
     </main>
   )
 }

@@ -7,6 +7,8 @@ import { ReactComponent as Trash } from '../../assets/img/trash.svg'
 import { ReactComponent as BasketArrow } from '../../assets/img/grey-arrow-left.svg'
 import { useDispatch } from 'react-redux'
 import { clearBasket } from '../../redux/actions/actionCreators'
+import { Transition } from 'react-spring/renderprops'
+
 
 export default function BasketWithContent({ basket: { items, totalPrice, totalCounter } }) {
 
@@ -14,6 +16,7 @@ export default function BasketWithContent({ basket: { items, totalPrice, totalCo
   function clearBasketHandler() {
     dispatch(clearBasket())
   }
+
   return (
     <>
       <div className="basket__header">
@@ -27,7 +30,19 @@ export default function BasketWithContent({ basket: { items, totalPrice, totalCo
         </button>
       </div>
       <div className="basket__content">
-        {items.map((item, index) => <BusketItem key={'Busket item' + index} item={item} index={index} />)}
+        <Transition
+          items={items} keys={item => item.id}
+          from={{ transform: 'translateX(-1000px)', opacity: 0 }}
+          enter={{ transform: 'translateX(0)', opacity: 1 }}
+          leave={{ transform: 'translateX(-1000px)', opacity: 0 }}
+          config={{ duration: 300 }}
+        >
+          {(item, state, index) => props => (
+            <div style={props}><BusketItem style={props} item={item} index={index} /></div>
+          )
+          }
+
+        </Transition>
       </div>
       <div className="basket__total-result">
         <p className="basket__total-title">Всего пицц: <span className="basket__total-amount">{totalCounter}</span></p>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './header.scss'
 import { useSelector } from 'react-redux'
 
-export default function Header({ pathname }) {
+export default function Header({ location: { pathname } }) {
 
   const { totalCounter, totalPrice } = useSelector(({ basket: { totalPrice, totalCounter } }) => ({
     totalPrice,
@@ -30,5 +30,5 @@ export default function Header({ pathname }) {
 }
 
 Header.propTypes = {
-  pathname: PropTypes.string.isRequired,
+  location: PropTypes.object,
 }

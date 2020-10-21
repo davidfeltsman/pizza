@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { useTransition, animated, config } from 'react-spring'
 
 export default function Order({ sortBy, orderDirection, onOrderClick, onSortByClick }) {
 
@@ -31,6 +32,22 @@ export default function Order({ sortBy, orderDirection, onOrderClick, onSortByCl
       setIsPopUpOpen(false)
     }
   }
+
+  const transitions = useTransition(isPopUpOpen, null, {
+    from: {
+      transform: 'rotateX(-100deg)',
+      transformOrigin: 'top',
+      opacity: 0,
+    },
+    enter: { transform: 'rotateX(0deg)', transformOrigin: 'top', opacity: 1 },
+    leave: {
+      transform: 'rotateX(-100deg)',
+      transformOrigin: 'top',
+      opacity: 0
+    },
+    config: config.wobbly
+  })
+
   return (
     <div ref={orderRef} className="categories__order">
       <div className="categories__wrapper">
@@ -49,20 +66,22 @@ export default function Order({ sortBy, orderDirection, onOrderClick, onSortByCl
           {currentOption}
         </button>
       </div>
-      {isPopUpOpen && <ul className="categories__order-list">
-        {orderRus.map((value, index) => (
-          <li key={value + index} className="categories__option">
-            <button
-              onClick={() => onSortByClick(orderEng[index])}
-              className={sortBy === orderEng[index]
-                ? "categories__button categories__button_active"
-                : "categories__button"}
-            >
-              {value}
-            </button>
-          </li>
-        ))}
-      </ul>}
+      {transitions.map(({ item, key, props }) => (
+        item && <animated.ul key={key} style={props} className="categories__order-list">
+          {orderRus.map((value, index) => (
+            <li key={value + index} className="categories__option">
+              <button
+                onClick={() => onSortByClick(orderEng[index])}
+                className={sortBy === orderEng[index]
+                  ? "categories__button categories__button_active"
+                  : "categories__button"}
+              >
+                {value}
+              </button>
+            </li>
+          ))}
+        </animated.ul>
+      ))}
     </div>
   )
 }

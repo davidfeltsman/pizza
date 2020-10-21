@@ -3,9 +3,20 @@
 .categories {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  padding-top: 40px;
   align-items: center;
   flex-wrap: wrap;
+  background-color: #fff;
+  padding-right: 50px;
+  padding-left: 50px;
+  @include _768 {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @include _380 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -172,7 +183,18 @@
  }
  &__current-category {
     font-size: 32px;
-    margin-top: 32px;
+    padding-top: 32px;
+    padding-right: 50px;
+    padding-left: 50px;
+    background-color: #fff;
+    @include _768 {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    @include _380 {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
     &::first-letter {
       text-transform: uppercase;
     }

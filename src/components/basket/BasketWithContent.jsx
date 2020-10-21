@@ -31,14 +31,14 @@ export default function BasketWithContent({ basket: { items, totalPrice, totalCo
       </div>
       <div className="basket__content">
         <Transition
-          items={items} keys={item => item.id}
+          items={items} keys={item => item.id + item.size + item.doughType}
           from={{ transform: 'translateX(-1000px)', opacity: 0 }}
           enter={{ transform: 'translateX(0)', opacity: 1 }}
           leave={{ transform: 'translateX(-1000px)', opacity: 0 }}
           config={{ duration: 300 }}
         >
           {(item, state, index) => props => (
-            <div style={props}><BusketItem style={props} item={item} index={index} /></div>
+            <div style={props}><BusketItem item={item} index={index} /></div>
           )
           }
 
